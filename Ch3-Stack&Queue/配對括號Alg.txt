@@ -1,0 +1,28 @@
+// 配對括號Alg
+while(input字串尚未由左而右scan完)
+{
+	x = nextToken(input);
+	if (x == "(")
+	{
+		push(s,x);
+	}
+	else
+	{
+		if (isEmpty(s))
+		{
+			return "No";
+		}
+		else 
+		{
+			pop(s);
+		}
+	}
+}
+if (isEmpty(s))
+{
+	return "Yes";
+}
+else
+{
+	return "No";
+}

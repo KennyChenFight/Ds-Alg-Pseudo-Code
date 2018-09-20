@@ -1,0 +1,36 @@
+Queue製作Stack
+
+1.
+push(S,item)
+{
+  if (isFull(S))
+  {
+    return "Stack is Full";
+  }
+  else
+  {
+    Enqueue(Q,item);
+  }
+}
+2.
+pop(S) 
+{
+  n = Queue裡面元素數量;
+  if (isEmpty(Q))
+  {
+    return "Stack is Empty";
+  }
+  else 
+  {
+    for i = 1 to n-1 do
+    {
+      X = Dequeue(Q);
+      Enqueue(Q,X);
+    }
+    item = Dequeue(Q);
+    return item;
+  }
+}
+分析:
+1.push之Time = O(1)
+2.pop之Time = O(n)

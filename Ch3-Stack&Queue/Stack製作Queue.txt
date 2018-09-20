@@ -1,0 +1,41 @@
+Stack製作Queue
+利用2個Stacks (S與T)
+
+1.
+Enqueue(Q,item) 
+{
+  if (isFull(Q)) 
+  {
+    return "Queue Full";
+  }
+  else 
+  {
+    push(S,item);
+  }
+}
+時間:O(1)，因為push(S,item)
+2.
+Dequeue(Q)
+{
+  if (isEmpty(T)) 
+  {
+    if (isEmpty(S))
+    {
+      return "Queue Empty";
+    }
+    else 
+    {
+      while (not isEmpty(S))
+      {
+        X = pop(S);
+        push(T,X);
+      }
+    }
+  }
+  item = pop(T);
+  return item;
+}
+時間:
+大部分時間為O(1)，因為T非空，所以pop(T)
+少部分時間為O(n)，因為清光S，push到T
+分攤成本:O(1)time

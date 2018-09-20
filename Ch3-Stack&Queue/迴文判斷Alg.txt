@@ -1,0 +1,15 @@
+n = string length(input)
+for i = 1 to n/2 do
+{
+	x = nextToken(input);
+	push(s,x);
+}
+if (n % 2 == 1)
+{ x = nextToken(input); }
+for i = 1 to n/2 do
+{
+	x = nextToken(input);
+	if (x != pop(s))
+	{ return "No"; }
+}
+return "Yes";
