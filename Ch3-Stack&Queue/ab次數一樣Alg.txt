@@ -2,36 +2,36 @@
 flag = 0;
 while(input尚未由左而右scan完)
 {
-	x = nextToken(input);
-	if (x == 'a')
-	{
-		if (flag == 1)
-		{
+  x = nextToken(input);
+  if (x == 'a')
+  {
+    if (flag == 1)
+    {
       return "Error";
-		}
-		else
-		{
-			push(s,x);
-		}
-	}
-	else 
-	{
-		flag = 1;
-		if (isEmpty(s))
-		{
-			return "Error";
-		}
-		else 
-		{
-			pop(s);
-		}
-	}
+    }
+    else
+    {
+      push(s,x);
+    }
+  }
+  else 
+  {
+    flag = 1;
+    if (isEmpty(s))
+    {
+      return "Error";
+    }
+    else 
+    {
+      pop(s);
+    }
+  }
 }
 if (isEmpty(s))
 {
-	return "Yes";
+  return "Yes";
 }
 else
 {
-	return "Error";
+  return "Error";
 }

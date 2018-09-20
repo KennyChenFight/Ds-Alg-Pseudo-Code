@@ -1,37 +1,37 @@
 // infix轉postfix之Alg
 while (infix尚未由左而右scan完)
 {
-	x = nextToken(infix);
-	if (x == operand) 
-	{
-		print(X);
-	}
-	else
-	{
-		if (x == ")")
-		{
-			repeat
-				y = pop(S);
-				if (y != "(")
-				{ print(y) }
-			until(y == "(")
-		}
-		else
-		{
-			switch(比較優先權(x, s->top))
-			{
-				case ">": push(s,x); break;
-				case "<=": repeat
+  x = nextToken(infix);
+  if (x == operand) 
+  {
+    print(X);
+  }
+  else
+  {
+    if (x == ")")
+    {
+      repeat
+        y = pop(S);
+        if (y != "(")
+        { print(y) }
+      until(y == "(")
+    }
+    else
+    {
+      switch(比較優先權(x, s->top))
+      {
+        case ">": push(s,x); break;
+        case "<=": repeat
                     y = pop(s);
                     print(y);
                    until(x > s->top)
                     push(s,x);
-			}
-		}
-	}
+      }
+    } 
+  }
 }
 while(not isEmpty(s))
 {
-	y = pop(s);
-	print(y);
+  y = pop(s);
+  print(y);
 }

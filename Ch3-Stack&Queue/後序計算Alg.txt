@@ -1,16 +1,16 @@
 // postfix evaluation alg
 while(postfix尚未由左而右scan完)
 {
-	x = nextToken(postfix);
-	if (x == operand)
-	{
-		push(s,x);
-	}
-	else
-	{
-		pop出適當數目之operator
-		執行對應計算
-		並把結果push回s
-	}
+  x = nextToken(postfix);
+  if (x == operand)
+  {
+    push(s,x);
+  }
+  else
+  {
+    pop出適當數目之operator 
+    執行對應計算
+    並把結果push回s
+  }
 }
 stack內即為結果值
