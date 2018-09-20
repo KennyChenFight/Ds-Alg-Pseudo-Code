@@ -1,5 +1,5 @@
 Queue製作Stack
-
+HELLO
 1.
 push(S,item)
 {
