@@ -7,7 +7,7 @@ while(input尚未由左而右scan完)
 	{
 		if (flag == 1)
 		{
-			return "Error";
+      return "Error";
 		}
 		else
 		{
