@@ -1,4 +1,4 @@
-// a b次數出現一樣 且a必須在b前面之al
+// a b次數出現一樣 且a必須在b前面
 flag = 0;
 while(input尚未由左而右scan完)
 {
