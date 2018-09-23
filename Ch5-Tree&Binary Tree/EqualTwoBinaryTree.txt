@@ -1,0 +1,21 @@
+Equal B.T (比較兩個Binary Tree是否一樣)
+
+Equal(S,T:B.T)
+{
+  res = False;
+  if (S == Null and T == Null)
+  {
+    res = True;
+  }
+  else if (S != Null and T != Null)
+  {
+    if (S->Data == T->Data)
+    {
+      if (Equal(S->Lchild,T->Lchild))
+      {
+        res = Equal(S->Rchild,T->Rchild);
+      }
+    }
+  }
+  return res;
+}
