@@ -1,0 +1,15 @@
+Count B.T Nodes (計算Binary Tree之Node數)
+
+Count(T:B.T)
+{
+  if (T == Null)
+  {
+    return 0;
+  }
+  else 
+  {
+    NL = Count(T->Lchild);
+    NR = Count(T->Rchild);
+    return NL + NR + 1;
+  }
+}
