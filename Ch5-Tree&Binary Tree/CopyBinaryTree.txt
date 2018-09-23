@@ -1,0 +1,17 @@
+Copy a B.T(複製Binary Tree)
+
+Copy(orig:B.T)
+{
+  if (orig == Null)
+  {
+    t = Null;
+  }
+  else
+  {
+    new(t);
+    t->Data = orig->Data;
+    t->Lchild = Copy(orig->Lchild);
+    t->Rchild = Copy(orig->Rchild);
+  }
+  return t;
+}
