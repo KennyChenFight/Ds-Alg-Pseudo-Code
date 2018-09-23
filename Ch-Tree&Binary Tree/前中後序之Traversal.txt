@@ -28,3 +28,4 @@ Postorder(T:BT)
     print(T->Data); // D
   }
 }
+Time:O(n)(因為B.T有n個Nodes)
