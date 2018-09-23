@@ -1,0 +1,22 @@
+Leaf of Binary Tree (計算Binary Tree的Leaf個數)
+
+Leaf(T:B.T)
+{
+  if (T == Null)
+  {
+    return 0;
+  }
+  else
+  {
+    NL = T->Lchild;
+    NR = T->Rchild;
+    if (NL + NR > 0)
+    {
+      return NL + NR;
+    }
+    else
+    {
+      return 1;
+    }
+  }
+}
