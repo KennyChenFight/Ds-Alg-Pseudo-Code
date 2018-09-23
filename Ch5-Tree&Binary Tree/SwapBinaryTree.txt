@@ -1,0 +1,13 @@
+Swap a BinaryTree (每個Node(或Non-leaf)之左右子點互換)
+
+Swap(T:B.T)
+{
+  if (T != Null)
+  {
+    Swap(T->Lchild);
+    Swap(T->Rchild);
+    temp = T->Lchild;
+    T->Lchild = T->Rchild;
+    T->Rchild = temp;
+  }
+}
