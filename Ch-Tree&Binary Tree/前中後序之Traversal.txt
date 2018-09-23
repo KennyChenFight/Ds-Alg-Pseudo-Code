@@ -13,9 +13,9 @@ Inorder(T:BT)
 {
   if (T != Null)
   {
-    Inorder(T->Lchild);
-    print(T->Data);
-    Inorder(T->Rchild);
+    Inorder(T->Lchild); // L
+    print(T->Data); // D
+    Inorder(T->Rchild); // R
   }
 }
 3.後序Traversal
@@ -23,8 +23,8 @@ Postorder(T:BT)
 {
   if (T != Null)
   {
-    Postorder(T->Lchild);
-    Postorder(T->Rchild);
-    print(T->Data);
+    Postorder(T->Lchild); // L
+    Postorder(T->Rchild); // R
+    print(T->Data); // D
   }
 }
