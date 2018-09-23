@@ -1,0 +1,30 @@
+1.前序Traversal
+Preorder(T:BT)
+{
+  if (T != Null) 
+  {
+    print(T->Data); // D
+    Preorder(T->Lchild); // L
+    Preorder(T->Rchild); // R
+  }
+}
+2.中序Traversal
+Inorder(T:BT)
+{
+  if (T != Null)
+  {
+    Inorder(T->Lchild);
+    print(T->Data);
+    Inorder(T->Rchild);
+  }
+}
+3.後序Traversal
+Postorder(T:BT)
+{
+  if (T != Null)
+  {
+    Postorder(T->Lchild);
+    Postorder(T->Rchild);
+    print(T->Data);
+  }
+}
