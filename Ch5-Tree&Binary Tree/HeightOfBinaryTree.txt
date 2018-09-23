@@ -1,0 +1,15 @@
+Height of B.T (計算Binary Tree之高度)
+
+Height(T:B.T)
+{
+  if (T == Null)
+  {
+    return 0;
+  }
+  else 
+  {
+    HL = Height(T->Lchild);
+    HR = Height(T->Rchild);
+    return Max(HL,HR) + 1;
+  }
+}
