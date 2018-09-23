@@ -1,0 +1,26 @@
+Level-order traversal (類似圖形的BFS)
+
+Level-order(T:BT)
+{
+  if (T != Null)
+  {
+    print(T->Data) // root
+    create(Q);
+    Enqueue(Q,T);
+    while(not isEmpty(Q)) 
+    {
+      X = Dequeue(Q);
+      if (X->Lchild != Null) 
+      {
+        print(X->Lchild);
+        Enqueue(Q,X->Lchild);
+      }
+      if (X->Rchild != Null)
+      {
+        print(X->Rchild);
+        Enqueue(Q,X->Rchild);
+      }
+    }
+  }
+}
+Time:O(n)(因為B.T有n個Nodes)

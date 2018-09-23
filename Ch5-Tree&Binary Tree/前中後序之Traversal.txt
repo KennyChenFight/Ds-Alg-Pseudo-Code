@@ -1,0 +1,31 @@
+1.前序Traversal
+Preorder(T:BT)
+{
+  if (T != Null) 
+  {
+    print(T->Data); // D
+    Preorder(T->Lchild); // L
+    Preorder(T->Rchild); // R
+  }
+}
+2.中序Traversal
+Inorder(T:BT)
+{
+  if (T != Null)
+  {
+    Inorder(T->Lchild); // L
+    print(T->Data); // D
+    Inorder(T->Rchild); // R
+  }
+}
+3.後序Traversal
+Postorder(T:BT)
+{
+  if (T != Null)
+  {
+    Postorder(T->Lchild); // L
+    Postorder(T->Rchild); // R
+    print(T->Data); // D
+  }
+}
+Time:O(n)(因為B.T有n個Nodes)
