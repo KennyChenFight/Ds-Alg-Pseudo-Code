@@ -63,3 +63,12 @@ Adjust(tree,i,n)
   tree[y/2] = x; // x置入正確位置
 }
 
+CreateHeap(tree,n)
+// 將tree[1...n] input data建成Heap
+{
+  for(i = n/2; i >= 1; i--)
+  {
+    Adjust(tree,i,n);
+  }
+}
+
