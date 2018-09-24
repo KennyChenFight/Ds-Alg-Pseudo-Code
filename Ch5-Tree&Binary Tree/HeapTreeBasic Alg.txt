@@ -1,0 +1,65 @@
+Heap Tree 之基本操作
+
+-----------------------
+Insert X in Heap
+Steps:
+1.X先暫置於the last Node之下一個位置
+2.X往上挑戰父點，直到無父點或挑戰失敗為止
+
+Time:
+X的最大移動距離=從leaf移動到Root，此為樹高，而Heap是Complete B.T
+故為O(logn)
+
+-----------------------
+Delete Max in Heap
+Steps:
+1.移走Root Data
+2.將the last Node:X刪除
+3.X先暫置於Root，並往下調整直到形成Heap為止
+
+Time:
+X的最大移動距離，頂多從Root移動到Leaf，此為樹高
+又因Heap是Complete B.T，故為O(logn)
+
+----------------------
+Create(Build) Heap
+兩種方法:
+1.Top-Down => 逐步插入資料建立Heap，每一步均需要維持Heap性質 => Time=O(nlogn)
+2.Button-Up => Data先以Complete B.T呈現(即input Array),從the last Parent開始調整每棵子樹成為Heap
+，往前之每個父點，直到root為止 => Time=O(n) (較快速)
+
+上面兩種方法所建立之Heap不一定相同
+
+Alg => Adjust(tree,i,n) + CreateHeap(tree,n) 組成
+
+Adjust(tree,i,n)
+// tree: array[1...n];
+// n: 元素個數
+// i: 其Node編號(array index No)
+// 調整以i為Root之子樹成為Heap
+{
+  x = tree[i];
+  y = 2 * i;
+  while (y <= n) // 表示還有子點
+  {
+    if (y < n) // 表示有右子點
+    {
+      if (tree[y] < tree[y+1]) // 看左右子樹誰大
+      {
+        y = y + 1;
+      }
+      // 此時y表示Max{左子,右子}之所在index
+    }
+    if (x >= tree[y])
+    {
+      break;
+    }
+    else
+    {
+      tree[y/2] = tree[y];
+      y = 2 * y; // 新的左子點
+    }
+  }
+  tree[y/2] = x; // x置入正確位置
+}
+
