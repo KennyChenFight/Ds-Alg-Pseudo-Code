@@ -1,0 +1,67 @@
+Binary Search Tree 基本操作
+
+------------------------------
+Delete X in BST
+steps:
+1.先Search for X
+2.分成下列三個cases
+  case1: X是Leaf,則刪X,then exit;
+  case2: X是Degree=1之Node,則刪X,將X的父點原本指向X的Pointer,指向X的子點,then Exit;
+  case3: X是Degree=2之Node,則以X的左子點中最大值(或找右子點中的最小值)令為Y,將Y取代X,針對Y點回case1
+         or case2處理
+
+------------------------------
+Search for x in BST Alg
+
+Search(T:BST, X:Key)
+// 在T中找到X，若找到傳回1(成功搜尋)，否則傳回0(失敗搜尋)
+{
+  if (T != Null)
+  {
+    switch(比較(X,T->Data))
+    {
+      case "==": return 1;
+      case "<": return Search(T->Lchild,X);
+      case ">": return Search(T->Rchild,X);
+    }
+  }
+  else
+  { 
+    return 0;
+  }
+}
+Time: (for Insert X, Delete X, Search X)
+Best case:高度最小化，平衡化時 O(logn) == Full、Complete BST、AVL Tree、Red-Black Tree
+Worst case:O(n) == skewed BST (左斜、右斜)
+Avg case:O(logn) (algo版) == randomized BST
+
+------------------------------
+Find ith Smallest data Alg
+Node Structure: Lchild Data Rchild Lsize
+Lsize:Node的左子樹之Node數
+
+Search(T:BST,i:int)
+{
+  if (T != Null)
+  {
+    k = T->Lsize + 1;
+    if (i == k)
+    {
+      return T->Data;
+    }
+    else if (i < k)
+    {
+      return Search(T->Lchild,i); // 左子樹第i個小
+    }
+    else
+    {
+      return Search(T->Rchild,i-k); // 右子樹第i-k個小
+    }
+  }
+}
+
+
+
+
+
+
