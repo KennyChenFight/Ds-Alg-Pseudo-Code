@@ -1,0 +1,24 @@
+Experssion Binary Tree之Evaluation Alg
+
+Node Structure => Lchild Data Value Rchild
+Data => 存Name of operator or operand
+Value => 存結果值(non-leaf) or 變數/常數值(leaf)
+
+Eval(T:Experssion B.T)
+{
+  if (T != Null)
+  {
+    Eval(T->Lchild);
+    Eval(T->Rchild);
+    switch(T->Data)
+    {
+      case "+": T->Value = (T->Lchild)->Value + (T->Rchild)->Value;
+      case "-": 同上格式
+      case "*": 同上格式
+      case "/": 同上格式
+      case "Not": T->Value = Not((T->Rchild)->Value);
+      case "負號": 同上格式
+      case "變數/常數值": T->Value = 變數/常數值;
+    }
+  }
+}
