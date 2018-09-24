@@ -59,6 +59,14 @@ Search(T:BST,i:int)
     }
   }
 }
+Time:
+Best case:O(logn)
+Worst case: O(n)
+
+------------------------------
+
+BST: find-min => Best:O(logn)、Worst:O(n)
+BST: find-max => Best:O(logn)、Worst:O(n)
 
 
 
