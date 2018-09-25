@@ -1,0 +1,43 @@
+[組合一]:任意的union(i,j)與Simple-Find(X)之組合
+------------------------------------------------
+任意的union(i,j):
+任意搬i(orj)當New Root，另一個為其子樹
+=>
+union(i,j)
+{
+  j->Parent = i; // i當New Root
+  (or i->Parent = j) // j當New Root
+}
+Time:O(1)
+
+Simple-Find(X):
+沿著X的Parent Link往上找到Root，傳回Root
+=>
+Find(X)
+{
+  temp = X;
+  while (temp->Parent != Null)
+  {
+    temp = temp->Parent;
+  }
+  return temp;
+}
+Time:O(H)，H為樹高
+分析:採用"任意的union"運作，有可能造成高度為O(n)的Tree，使得Find(X)一次之time為O(n)
+
+[組合二]:using-by-Height of Simple-Find(X)組合
+1.union-by-Height:樹高較高者為New Root，樹高較低者為其子樹
+Note:高度相同作union，新樹高度才會加一，否則維持原高度
+分析:union-by-Height所建立之Tree高度頂多為O(logn)，Find(X)運作Time，頂多為O(logn)
+補充:
+[其他版本]
+=>
+union-by-size => 針對Root的Parent值之絕對值較大者作New Root
+union-by-rank => rank = node數 = size or rank = Root's degree(rank較大當New Root)
+union-by-weight => weight可以是Height or size or rank
+
+[組合三]:union-by-Height與Find-with-path-compression組合
+Find(X)-with-path-compression:
+除了沿著X的Parent Link往上找到Root之外，過程中，並將X(包含X)之Parent Link上所有Nodes(不包含root)，
+把他們的Parent Link均改成指向Root，對於未來Find(X)之時間有所改變
+分析:此組合Find(X)之時間成長速率極緩，趨近為O(1)Time
