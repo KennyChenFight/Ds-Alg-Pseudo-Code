@@ -1,0 +1,27 @@
+Tree化成Binary Tree
+方法:Leftmost-child-Next-Right-sibling
+Steps:
+1.建立sibling間的links
+2.刪除父與子之間的Links，但保留Leftmost-child link
+3.順時針轉45度，即保留的Leftmost-child為左子點，次右兄弟為右子點
+
+--------------------
+Binary Tree化為Tree
+Steps:
+1.逆時針轉45度，將右子點拉上來成為次右兄弟
+2.補足父與子點之間的Links
+3.刪除Sibling間之地Links
+
+--------------------
+Forest化成Binary Tree
+Steps:
+1.將Forest中每棵Tree先化成B.T
+2.將各個B.T之root視為Sibling，並平行串接
+3.針對這些roots順時針轉45度
+
+--------------------
+Binary Tree化成Forest
+Steps:
+1.將root之右子點鏈結上所有Nodes均拉上成為root之Sibling
+2.切開root間之sibling links，得到多個B.Tree
+3.每個B.T化為Tree
