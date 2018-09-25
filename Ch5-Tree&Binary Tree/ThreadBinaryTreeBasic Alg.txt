@@ -52,4 +52,30 @@ Inorder(T:Head Node)
   until(temp == T)
 }
 
+----------------------------
+Insert t 成為 S的右子點
+分為兩種case
+case1: S原本無右子點
+case2: S原本有右子點
+
+Insert(t,S)
+{
+  t->RightThread = S->RightThread;
+  t->Rchild = S->Rchild;
+  
+  t->LeftThread = True;
+  t->Lchild = S;
+  
+  S->RightThread = False;
+  S->Rchild = t;
+  
+  if (t->RightThread == false) // 代表S原本有右子點
+  {
+    temp = Insuc(S); // S原本的中序後繼者
+    temp->Lchild = t;
+  }
+  
+}
+
+Note: Insert t 成為 S的左子點 => 將上述Alg的 left改Right、Right改Left、Insuc(x)改Inpre(x)
 
