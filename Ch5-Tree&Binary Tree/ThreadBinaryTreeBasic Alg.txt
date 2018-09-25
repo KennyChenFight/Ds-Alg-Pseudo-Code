@@ -34,3 +34,22 @@ Inpre(X)
   }
   return temp;
 }
+
+----------------------------
+Inorder 簡化的中序追蹤 => No Stack、No Recursion
+規則:
+從Head Node出發，不斷地問每個Node的Insuc為何，並列印(Head Node不用列印)，最後又回到Head結束
+
+Inorder(T:Head Node)
+{
+  temp = T;
+  repeat
+    temp = Insuc(temp);
+    if (temp != T)
+    {
+      print(temp->Data);
+    }
+  until(temp == T)
+}
+
+
