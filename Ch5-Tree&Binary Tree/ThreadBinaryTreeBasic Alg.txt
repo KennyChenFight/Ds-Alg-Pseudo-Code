@@ -1,0 +1,36 @@
+Insuc(X) alg => 找出X的中序後繼者
+規則:
+1.若X->Rchild是True，則X->Rchild即是
+2.若X->Rchild是False，則往X的右子點(包含)的左子點鍵結往左下尋找，直到找到某個Node之LeftThread是True，
+此Node即是
+
+Insuc(X)
+{
+  temp = X->Rchild;
+  if (X->RightThread == False)
+  {
+    while (temp->LeftThread == False)
+    {
+      temp = temp->Lchild;
+    }
+  }
+  return temp;
+}
+
+----------------------------
+Inpre(X) alg => 找出X的中序先行者
+規則:
+將Insuc之Alg中Right改Left、Left改Right即可
+
+Inpre(X)
+{
+  temp = X->Lchild;
+  if (X->LeftThread == False)
+  {
+    while(temp->RightThread == False)
+    {
+      temp = temp->Rchild;
+    }
+  }
+  return temp;
+}
