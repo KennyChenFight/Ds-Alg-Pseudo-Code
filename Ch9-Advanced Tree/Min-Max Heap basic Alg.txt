@@ -1,0 +1,26 @@
+Min-Max Heap 基本操作
+-----------------------
+Insert x in Min-Max Heap
+Steps:
+1.X先暫置於The last Node之下一個位置(即n = n + 1)
+2.令X的父點為P，分成下列2個cases:
+case1:P位於min-level
+則if (X < H[P])
+  {
+    H[n] = H[P];
+    verifyMin(H,P,X); // X從P位置挑戰min-level
+  }
+  else
+  {
+    verifyMax(H,n,X); // X從n位置挑戰Max-level
+  }
+case2:P位於Max-level
+則if (X > H[P])
+  {
+    H[n] = H[P];
+    verifyMax(H,P,X); // X從P位置挑戰Max-level
+  }
+  else
+  {
+    verifyMin(H,n,X); // X從n位置挑戰min-level
+  }
