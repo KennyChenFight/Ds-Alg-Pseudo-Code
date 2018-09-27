@@ -24,3 +24,34 @@ case2:P位於Max-level
   {
     verifyMin(H,n,X); // X從n位置挑戰min-level
   }
+-----------------------
+Delete-min in Min-Max Heap
+Steps:
+1.移走Root Data(因為它是最小值)
+2.將the last node = X 刪除
+3.X插入到一個root為空的min-Max Heap中
+分成下列cases:
+case1:此root無子根，則X置入root，then Exit
+case2:此root的子孫中的最小值是位於Root的左右子點之其中一個，令為k，
+則if (X < k)
+  {
+    X置入Root Exit;
+  }
+  else
+  {
+    X,K互換位置 Exit;
+  }
+case3:root的子孫中，最小值是root的孫子中的其中一個，令為k，且k的父點為P
+則if (X < k)
+  {
+    X置入Root Exit;
+  }
+  else
+  {
+    k置入root;
+    if (X > P)
+    {
+      X,P兩值互換;
+      goto(3);
+    }
+  }
