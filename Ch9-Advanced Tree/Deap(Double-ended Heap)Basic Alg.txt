@@ -1,0 +1,24 @@
+Deap(Double-ended Heap) 基本操作
+---------------------------------
+Insert X in Deap
+Steps:
+1.X先暫至於The last Node之下一個位置(n = n + 1)
+2.位置n位於哪裡，分成2個cases
+case1:位於min-Heap，則令j是它在Max-Heap之對應Node編號，
+if (X > Deap[j])
+{
+  Deap[n] = Deap[j];
+  Max-Heap-Insert(Deap,j,X);
+}
+else
+{
+  min-Heap-Insert(Deap,n,X);
+}
+---------------------------------
+Delete-min in Deap
+Steps:
+1.移走Deap[2](左子樹Root)資料，形成一個空缺(因為是最小值)
+2.the last Node刪除，暫置X變數
+3.root空缺是由其min{左子、右子}往上遞補，新的空缺也是如此操作，最後會在某個leaf形成空缺(位置i)
+4.執行Deap的Insert X 運作在i(leaf)位置上
+3、4步驟時間皆為O(logn)
