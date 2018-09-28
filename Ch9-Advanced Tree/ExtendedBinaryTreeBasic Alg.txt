@@ -1,0 +1,26 @@
+Extended Binary Tree(延伸二元樹) 基本操作 
+------------------------------------------
+Huffman Alg 求 min WEPL值
+令 W = n個外部節點加權值集合
+Steps:
+1.從W中取出2個最小的權值
+2.建立Extended Binary Tree
+3.將這2個權值和視為新權值，加入W中
+4.Repeat 1~3 Until W中只剩下一個權值，即作(n-1)回合，此tree叫作Huffman Tree，其
+WEPL值即為min WEPL
+=>
+Node Structure如下:
+Lchild Weight Rchild
+Algo Huffman(W:加權值集合,N:加權值個數)
+{
+  for i = 1 to (n-1) do
+  {
+    new(t);
+    t->Lchild = Del-min(W);
+    t->Rchild = Del-min(W);
+    t->Weight = (t->Lchild)->Weight + (t->Rchild)->Weight;
+    Insert(W,t);
+  }
+}
+Time分析:W適合用Heap maintain(min-Heap)，其中Del-min(W)、Insert(W,t)
+皆花O(logn)time，又共作(n-1)回合，所以total = O(nlogn)
