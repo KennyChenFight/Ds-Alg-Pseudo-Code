@@ -1,0 +1,19 @@
+SMMH(Symmetric Min-Max Heap) 基本操作
+--------------------------------------
+滿足三種性質:
+P1:Left sibling <= Right sibling
+P2:Node X 有祖父(grandparent)，則祖父的左子點必<=X
+P3:祖父的右子點必>=X
+--------------------------------------
+Insert X in SMMH
+Steps:
+1.X暫置於The last Node之下一個位置
+2.check P1是否滿足，若不滿足，兄弟對調
+3.check P2及P3是否滿足，若違反其中一個，則調整
+--------------------------------------
+Delete X in SMMH
+Steps:
+1.移走SMMH[2](左子樹Root)Data(因為最小值)，形成一個空格
+2.The last Node X 刪除
+3.check P1是否滿足，若不滿足，兩值交換，check P2，調整滿足P2，P3不用check
+
