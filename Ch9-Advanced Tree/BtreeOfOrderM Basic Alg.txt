@@ -1,0 +1,24 @@
+B tree of order m (Balance m-way search tree) 基本操作
+-------------------------------------------------------
+Insert X in B tree of order m
+Steps:
+1.先Search for X，其Failure Node之Parent為置入Node
+2.置入X於Node內
+3.檢查Node內的key數是否Overflow
+  case1:沒有(即key數<=m-1)，then Exit;
+  case2:有(即key數>m-1)，then 需作Split(分裂)處理，且Split後，必須針對父點goto3執行
+  Split:將第[m/2]個key上拉到父點去，其它分裂成兩個子點，父點會多一個key，父點須goto3
+-------------------------------------------------------
+Delete X in B tree of order m
+Steps:
+1.先Search for X，找出X位於哪個Node
+2.分兩大狀況處理:
+  a.X位於Leaf:
+    刪X
+    檢查此Node是否會underflow(key數不足)(破產)
+    case1:沒有不足(key數仍>=[m/2]-1)，then Exit;
+    case2:不足(key數<[m/2]-1)，則是否可能Rotation調整(跟兄弟借錢)，若可以則作Rotation，
+    不行，則須作Combine處理(跟父點借錢)，且Combine完後，必須針對父點goto檢查父點是否會破產之處理
+  b.X位於Non-leaf:
+    X位於Non-leaf，則以X的左子樹中最大值，令為y，(或找X的右子樹中最小值)，去取代X，
+    而Y必定位於Leaf，相當於Leaf少一個key，故須回去X位於Leaf之情況去處理
