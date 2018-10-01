@@ -1,0 +1,13 @@
+Red-Black Tree[Algo版本] 之基本操作
+-------------------------------------
+Insert X in R-B Tree
+Steps:
+1.先Search for X
+2.在Searching經過的path上，若發現有某個Node，其兩個子點是紅色，則須作color change，
+且color change後，若有兩個連續的紅色Nodes，則必須作Rotation調整
+3.此時，置入X，並標示為紅色
+4.若有連續的紅色Nodes，須作Rotation調整
+5.Root一律改黑(if needed)
+Rotation: 中間往上拉並為黑色，小的放左，大的放右，兩者皆為紅色
+Note:五步驟作完，切勿回頭，2跟4的Rotation頂多做一個
+
