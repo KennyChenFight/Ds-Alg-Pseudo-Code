@@ -1,0 +1,37 @@
+Insertion Sort(插入排序)之Alg
+------------------------------
+分為
+1.Insert(A,r,i) 副程式
+2.Insort(A,n) 主程式
+
+Insert(A,r,i)
+// 將Data:r，插入到A[0]~A[i]已排序好之串列中之正確位置
+{
+  j = i;
+  while (r < A[j]) do
+  {
+    A[j+1] = A[j]; // A[j]往後挪
+    j = j - 1;
+  }
+  A[j+1] = r; // r置入正確位置
+}
+Insort(A,n)
+// 排序A[1]~A[n]
+{
+  A[0] = -∞; // 防止r恰巧是sublist中之最小值之插入，導致infinite loop之情況
+  for (i=2; i<=n; i++)
+  {
+    Insert(A,A[i],i-1);
+  }
+  或
+  for (i=2; i<=n; i++)
+  {
+    A[0] = A[i];
+    Insert(A,A[i],i-1);
+  }
+}
+------------------------------------
+Time:
+1.Best case:O(n) => 當input Data剛好是小->大呈現時
+2.Worst case:O(n平方) => 當input Data剛好是大->小呈現時
+3.Avg case:O(n平方)
