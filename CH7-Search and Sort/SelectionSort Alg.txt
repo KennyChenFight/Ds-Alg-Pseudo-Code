@@ -1,0 +1,26 @@
+Selection Sort(選擇排序)之Alg
+------------------------------
+SelectionSort(A,n)
+// 排序A[1]~A[i]
+{
+  for i=1 to (n-1) do
+  {
+    min = i; // 代表最小值所在的index
+    for j=i+1 to n do
+    {
+      if (A[j]<A[min])
+      {
+        min = j;
+      }
+    }
+    if (min != i)
+    {
+      Swap(A[i],A[min]);
+    }
+  }
+}
+Time:
+Best、Avg、Worst = O(n平方)
+說明:任何情況下，A[j]<A[min]的比較次數皆為(n-1)+(n-2)+.....+(1) = O(n平方)
+Space:
+額外空間需求:固定O(1)，與n無關
