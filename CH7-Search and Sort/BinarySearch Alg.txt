@@ -1,0 +1,41 @@
+Binary Search (二分搜尋法)之兩個Alg
+-----------------------------------
+Interative版本:
+BinSearch(A,n,X)
+// 在A[1]~A[n] n筆Data中找X，若找到，則傳回X所在之index value，
+// 否則，傳回0(找不到)
+{
+  l = 1; u = n;
+  while (l <= u)
+  // 還有Data可以Search
+  {
+    m = (l + u) / 2; // 整數除法
+    switch (x,A[m])
+    {
+      case "==": return m; // 找到X
+      case "<": u = m - 1; // X落在左半部
+      case ">": l = m + 1; // X落在右半部
+    }
+  }
+  return 0; // 找不到X
+}
+-----------------------------------
+Recursive版本:
+BinSearch(A,l,u,X)
+// 在A[l]~A[u]中找X
+{
+  if (l <= u)
+  // 還有Data可以Search
+  {
+    m = (l + u) / 2;
+    switch (X,A[m])
+    {
+      case "==": return m; // 找到X
+      case "<": return BinSearch(A,l,m-1,X); // X落在左半部
+      case ">": return BinSearch(A,m+1,u,X); // X落在右半部
+    }
+  }
+  return 0; // 找不到X
+}
+-----------------------------------
+時間:O(logn)
