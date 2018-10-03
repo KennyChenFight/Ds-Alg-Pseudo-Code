@@ -1,0 +1,70 @@
+Quick Sort(快速排序)之Alg[DS版本]
+--------------------------
+Qsort(A,l,u)
+// 排序A[l]~A[u]
+// 且假設A[l]必定<=A[u+1]，防止PK為MAX值之用
+{
+  if (l < u) // 表有>=2個Data
+  {
+    PK = A[l];
+    i = l;
+    j = u + 1;
+    Repeat:
+      Repeat:
+        i = i + 1;
+      Until (A[i] >= PK);
+      Repeat:
+        j = j - 1;
+      Until (A[j] <= PK);
+      if (i < j) // 尚未交會
+      {
+        Swap(A[i],A[j]); // 俘虜交換
+      }
+    Until (i >= j); // 兩軍交換
+    Swap(A[l],A[j]); // 立碑
+    Qsort(A,l,j-1); // 左Qsort
+    Qsort(A,j+1,u); // 右Qsort
+  }
+}
+分析:
+Time:
+Best case:O(nlogn) => Pk之位置剛好切割成左、右兩等分時
+Worst case:O(n平方) => 切割無效果，當pk剛好是最小值或最大值的時候
+形成 => 0筆,PK,(n-1)筆 或 (n-1筆),PK,0筆 => 只有一個Subproblem left
+Space:
+O(logn)~O(n)
+額外空間來自於recursion所需之Stack space，而Stack size取決於recursive call depth(次數)
+Best case:O(logn) => partition恰到好處
+Worst case:O(n) => partition沒效果
+Unstable
+----------------------------------------
+QuickSort之Alg [Algo版]
+QuickSort(A,p,r)  
+// 排序A[p]~A[r]
+{
+  if (p < r) // 表還有>=2個Data
+  {
+    q = Partition(A,p,r); // q為PK之正確位置
+    QuickSort(A,p,q-1); // 左半部QuickSort
+    QuickSort(A,q+1,r); // 右半部QuickSort
+  }
+}
+Partition(A,p,r)
+{
+  X = A[r]; // A[r]為PK
+  i = p - 1;
+  for j=p to (r-1) do
+  {
+    if (A[j] <= X)
+    {
+      i = i + 1;
+      Swap(A[i],A[j]);
+    }
+  }
+  Swap(A[i+1],A[r]);
+  return (i+1); // 傳回PK之正確位置
+}
+Note:Data都一樣，algo版視為Worst case => O(n平方)
+如何改善:
+1.先花O(n)time check是否所有data皆一樣，若一樣，則Exit
+2.改用DS版本的partition => O(nlogn) => 因為DS版本視為Best case
