@@ -1,0 +1,29 @@
+Heap Sort之Alg
+-------------------------------------------------------------------------------------
+Steps:
+1.先將n個Data以Button-Up方式建立Max-Heap
+2.執行(n-1)個回合之排序工作
+=> 每一回合執行類似Del-Max工作，即Swap(root,the last Node)，並對剩下的Data調整成Heap
+
+Heap Sort Alg =>
+1.Adjust(tree,i,n) => 調整成以i(Node號)為root之子樹成Heap
+2.HeapSort(tree,n) => sort tree[1]~tree[n]
+{
+  for (i=n/2; i>=1; i--)
+  {
+    Adjust(tree,i,n);
+  }
+  for (i=n-1; i>=1; i--)
+  {
+    Swap(tree[1],tree[i+1]); // 交換root,the last node
+    Adjust(tree,1,i); // 調整root到剩下的Data成為Heap
+  }
+}
+分析:
+Time => Avg/Best/Worst case:O(nlogn)
+說明:
+1.建立Heap:花O(n)time
+2.執行(n-1)次回合，每一回合花O(logn)time執行類似"Del-Max"運作，所以花O(nlogn)
+所以total: O(n)+O(nlogn) => O(nlogn)
+Space: O(1) => 額外空間需求固定
+Unstable
