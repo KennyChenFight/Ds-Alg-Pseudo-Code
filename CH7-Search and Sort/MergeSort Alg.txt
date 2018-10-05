@@ -1,0 +1,52 @@
+Iterative 2-way Merge Sort之Alg
+--------------------------------
+如何合併兩個Run => Run1 and Run2 成一個Run
+While(Run1 and Run2 尚未Scan完)
+{
+  if (Run1[p] <= Run2[q])
+  {
+    output Run1[p] into NewRun;
+    p = p + 1;
+  }
+  else
+  {
+    output Run2[q] into NewRun;
+    q = q + 1;
+  }
+}
+while(Run1尚未Scan完)
+{
+  Copy Run1剩下的Data into NewRun;
+}
+while(Run2尚未Scan完)
+{
+  Copy Run2剩下的Data into NewRun;
+}
+分析:
+Merge Sort每一回合之合併處理是O(n)
+Iterative 2-way Merge Sort n個Data需要log2n取上限之回合數
+Total:O(nlogn)
+-----------------------------------------
+Recursive Merge Sort之Alg
+Steps:
+1.Data List一律對切兩半
+2.左、右半部各自Merge Sort
+3.合併左、右兩個Runs成一個Run
+rMergeSort(A,l,u,p)
+// 排序A[l]~A[u]
+// 得到一個Run => p
+if (l >= u)
+{
+  p = l;
+}
+else // l < u => 有>=2筆Data
+{
+  m = (l + u) / 2;
+  rMergeSort(A,l,m,q); // 左半部排序得到q
+  rMergeSort(A,m+1,u,r); // 右半部排序得到r
+  MergeTwoRuns(A,q,r,p); // 合併左、右兩個Runs成一個Run
+}
+分析:
+Avg/Best/Worst case: O(nlogn)
+Space: O(n) => 額外空間需求是用來保存每一回之合併結果
+Stable
