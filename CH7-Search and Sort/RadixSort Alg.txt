@@ -1,0 +1,53 @@
+Radix Sort之Alg [DS版本] 等同於Bucket Sort
+-------------------------------------------
+採用Distribution and Merge的排序技巧
+分為兩種: LSD radix sort、MSD radix sort
+-------------------------------------------
+LSD Radix Sort
+Steps:
+1.假設r是採用的基底(Base or 進制)，則準備r個Buckets，編號:0~(r-1)
+2.假設d是最大值之位數個數，則表要做d回合完成Sort，或者，已知input Data之值域範圍或值域<=多少
+=>即知d回合
+=>回合數卡死了
+=>常數與data n數無關
+3.從最低位數開始，往最高位數，依序執行各回合工作 例=>Pass1:個位數 Pass2:十位數 Pass3:百位數
+4.每一回合做2個工作
+=>
+a.分派:依Data之某位數值，將他分派到對應的Bucket中
+b.合併:由0到(r-1)合併Bucket內Data成一串列
+
+分析:
+Time Complexity: O(d*(r+n))
+因為執行d回合，每一回合主要有2個工作
+1. 分派: O(n)
+2. 合併: O(r)
+每一回合花O(n+r)time
+所以total = d*O(n+r) = O(d*(n+r))
+說明:
+1. r是base, 可視為常數:C1
+2. 因為值域受到限制，所以d=回合數是固定值，與n無關，故也視為常數C2
+所以O(d*(n+r)) => O(n)
+Space: 額外空間需求即Buckets size，有r個buckets，每個bucket size = n，所以O(r*n)
+Stable => FIFO
+-------------------------------------------
+MSD Radix Sort
+Steps:
+1.依照最高位數值，將Data分派到對應的Bucket中
+2.每個Bucket各自排序
+3.合併Bucket結果，from 0~(r-1)號
+特色:
+與LSD不同在於:分派及合併都各做一次，不像LSD要做d次，MSD適用於最大鍵值位數之個數太大之case
+-------------------------------------------
+  Ds版本           Alg版本
+LSD radix Sort = Radix Sort
+MSD radix Sort = Bucket Sort
+radix Sort
+=Bucket Sort 
+-------------------------------------------
+Bucket Sort[Alg版本]
+Step:
+1. 先將每個資料化成純小數
+2. 以小數點後第一位數之值，分派Data到Bucket中
+3. 每個Bucket之Data List均維持是ordered list
+4. 最後合併r個buckets from 0~(r-1)號
+Note: 此種作法也可視為Hashing(雜湊)，用來作為sorting之方法 
