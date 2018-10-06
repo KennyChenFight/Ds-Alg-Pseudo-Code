@@ -1,0 +1,59 @@
+Select ith Smallest Data Alg
+-----------------------------
+利用Quick Sort的Partition技巧
+Algo:
+Select(A,p,r,i)
+// 在A[p]~A[r]中找出ith smallest data，假設 p<r
+{
+  q = Partition(A,p,r); // 決定出PK的正確位置
+  k = q - p + 1; // pk是kth小的Data
+  if (i == k)
+  {
+    return A[q]; // pk即是第ith小的Data
+  }
+  else if (i < k)
+  {
+    return Select(A,p,q-1,i); // 在左半部找第ith小的Data
+  }
+  else // i > k
+  {
+    return Select(A,q+1,r,i-k); // 在右半部找第(i-k)th小的Data
+  }
+}
+分析:
+Time => Best case: 當Partition恰好將Data切成兩等分=>O(n)
+     => Avg case: O(n)
+     => Worst case: 當PK恰巧是min or Max時候 => O(n平方)
+----------------------------------------------------------
+解決Worst case:O(n平方)之問題
+原則:避免PK是min or Max值，使用"median-of-medians"(中間鍵s之中間鍵)作為PK
+Algo:
+Select(A,p,r,i)
+// A[p]~A[r]有n個Data
+{
+  1.先將n個Data分成[n/5]取上限個groups，每個group為5個Data，可能有一個group不足5個Data
+  =>Time:O(n)
+  2.每個Group之5個Data各自sort(小->大)
+  =>Time:O(n)
+  3.每個Group之第三個Data為該Group之中間鍵，在這些中間鍵中，運用Select遞迴，找出他們
+  的中間鍵，即為median-of-medians，此為PK
+  =>Time:O([n/5])
+  4. q = Partition(A,p,r); 
+  =>Time:O(n)
+  5. k = q - p + 1; // pk是第kth小
+  if (i == k)
+  {
+    return A[q];
+  }
+  else if (i < k)
+  {
+    return Select(A,p,q-1,i);
+  }
+  else 
+  {
+    return Select(A,q+1,r,i-k);
+  }
+}
+
+Worst case => O(n)
+Note: group元素要>=5個，才會O(n)，若 < 5個=>O(nlogn)
