@@ -1,0 +1,32 @@
+Counting Sort(計數排序法)之Alg
+--------------------------------
+假設n為Data個數，k為值域範圍限制
+Steps:
+1.統計每個值域之出現次數，記錄在Count[1...k]中
+Algo:
+for i=1 to k do
+  Count[i] = 0;
+=> O(k)
+for i=1 to n do
+  Count[A[i]]++;
+=> O(n)
+2.求出每個值域之值未來擺放的起始位置，記錄在Start[1...k]中
+Algo:
+Start[1] = 1;
+for i=2 to k do
+  Start[i] = Start[i-1] + Count[i-1];
+=> O(k)
+3.依Start之指示將input Data置入到Output array中之正確起始位置，且Start值加1
+Algo:
+for i=1 to n do
+{
+  Output[Start[A[i]]] = A[i];
+  Start[A[i]]++;
+}
+=> O(n)
+分析:
+Time => total time:O(k)+O(n)+O(k)+O(n)=>O(n+k)
+說明:
+因為值域受到限制，k視為常數c => O(n+k)=O(n+c)=>O(n)=>Linear-time Sorting method
+Space => 額外空間需求是 = Count[1...k] + Start[1...k] + Output[1...n] = O(n+k)
+Stable
