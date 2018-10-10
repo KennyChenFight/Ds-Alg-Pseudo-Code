@@ -1,0 +1,39 @@
+DFS (DS版)(無向圖)
+------------------------------
+DFS(S:Start Vertex)
+// 假設Visited[1...n] of Boolean之初值已設好為False
+{
+  Visited[S] = True;
+  for each vertex W adjacent to S do
+  {
+    if (not Visited[W])
+    {
+      DFS(W); // 遞迴
+    }
+  }
+}
+Note:
+1.注意Start Vertex為何
+2.DFS Order並非唯一，通常會規定依Vertex No小者優先，則DFS Order唯一
+-------------------------------
+BFS (DS版)(無向圖)
+BFS(S:Start Vertex)
+// 假設Visited[1...n] of Boolean之初值已設好為False
+{
+  Visited[S] = True;
+  CreateQueue(Q); // 建立佇列:Q
+  Enqueue(Q,S);
+  while (Not isEmpty(Q))
+  {
+    u = Dequeue(Q); // 從Q中移除一個點
+    for each vertex W adjacent to u
+    {
+      if (Not Visited[W])
+      {
+        Visited[W] = True;
+        Enqueue(Q,W);
+      }
+    }
+  }
+}
+Note: BFS Order也非唯一
