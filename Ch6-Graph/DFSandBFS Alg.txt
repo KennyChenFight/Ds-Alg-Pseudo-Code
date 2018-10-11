@@ -37,3 +37,117 @@ BFS(S:Start Vertex)
   }
 }
 Note: BFS Order也非唯一
+-------------------------------
+BFS (Algo版)(無向圖)
+BFS(G,S)
+{
+  for each vertex u ε G.V-{S}
+  {
+    u.color = white;
+    u.d = ∞;
+    u.Ω = Null;
+  }
+  S.color = gray;
+  S.d = 0;
+  S.Ω = Null;
+  Q = 0; // 建立佇列Q
+  Enqueue(Q,S);
+  while (Q != 0)
+  {
+    u = Dequeue(Q);
+    for each vertex v ε G.Adj[u]
+    {
+      if (v.color == white)
+      {
+        v.color = gray;
+        v.d = u.d + 1;
+        v.Ω = u;
+        Enqueue(Q,v);
+      }
+    }
+    u.color = black; // u已完成BFS的檢視
+  }
+}
+說明:
+1. u.color =>
+white:尚未Visited
+Gray:已Visited，但尚未完成BFS之檢視
+black:已完成BFS之檢視
+2. u.d =>
+Start 到 u 之Distance(邊數)
+3. u.Ω =>
+u 之父點，即從哪個點來拜訪u
+Note:
+1.針對無向圖，求S到其他各點之Short Path length，則用BFS(G,S)即可求出
+2.Ω的目的，方便繪圖
+-----------------------------------------
+DFS (Algo版)(有向圖)
+主程式 =>
+DFS(G)
+{
+  for each vertex u ε G.V
+  {
+    u.color = white;
+    u.Ω = Null;
+  }
+  time = 0;
+  for each vertex u ε G.V
+  {
+    if (u.color == white)
+    {
+      DFS-visit(G,u);
+    }
+  }
+}
+副程式 => 
+DFS-visit(G,u)
+{
+  time = time + 1;
+  u.d = time;
+  u.color = gray;
+  for each vertex v ε G.Adj[u]
+  {
+    if (v.color == white)
+    {
+      v.Ω = u;
+      DFS-visit(G,v);
+    }
+  }
+  u.color = black;
+  time = time + 1;
+  u.f = time;
+}
+說明:
+1. u.d = u的discovered time
+2. u.f = u的finished time
+--------------------------------
+DFS對有向圖
+邊的種類可分為4類
+1. Tree Edge(樹邊)
+2. Back Edge(後退邊)
+3. Forward Edge(前進邊)
+4. Cross edge(跨越邊)
+
+Tree Edge: DFS追蹤經過的邊
+Rule: 
+u -> v 
+if v 是 白色(white)
+then (u,v) is Tree Edge
+
+Back Edge: 指回祖先(Ancestor)邊
+Rule: 
+u -> v 
+if v 是灰色(Gray)
+then (u,v) is Back Edge
+
+Forward Edge: 指向子孫(後代)(descendent)邊
+Cross Edge: 跨越不同子樹/樹之Edge或除了上述三種以外的Edge
+
+如何區別Forward Edge、Cross Edge
+利用Discovered Time
+u -> v 
+if v 是黑色(Black)
+then if u.d < v.d
+      Forward Edge
+     else
+      Cross Edge
