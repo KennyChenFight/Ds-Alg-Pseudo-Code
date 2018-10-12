@@ -1,0 +1,98 @@
+求Min Spanning Tree之三種Algo => 皆採用Greedy策略
+--------------------------------------------------
+Kruskal's algo:
+令G=(V,E)，|E|=e，|V|=n
+Steps:
+1. 自E中挑選出最小成本的邊(u,v)
+2. 判斷(u,v)加入Spanning Tree中，是否會形成Cycle，若會，則放棄(u,v)，否則加入S中
+3. Repeat 1~2 Until 挑出(n-1)條邊或E為空
+4. if S has < (n-1)條邊 then "No Spanning Tree"
+如何判斷(u,v)加入S中是否會形成Cycle:
+作法 => 利用Disjoint Sets之Find(X)及Union(i,j)運作
+Find(X) => Find-with-path-compression:O(1)
+Union(i,j) => Union-by-Height:O(1)
+Algo:
+if (Find(u) != Find(v)) // 代表u,v分屬不同集合
+{
+  add(u,v) into S;
+  union(u,v);
+}
+else
+{
+  give up(u,v); // 因為會形成Cycle
+}
+
+時間分析:令有V個點，E條邊in G
+[DS版]:
+Kruskal’s Algo最多作E回合，而每一回合主要有兩個動作:
+1.自邊集合中Delete-min cost edge(u,v)
+=>令G中所有邊成本用Heap來維持，所以Delete-min cost花O(logE)
+2.判斷(u,v)加入S中是否形成Cycle
+=>用union(i,j)及Find(u)/(v)之Algo，皆只花O(1)time
+所以每一回合頂多花O(logE)
+Total Time: E*O(logE) = O(ElogE)
+[Algo版]:
+1.先將每邊成本由小->大排序
+Time:O(ElogE)
+2.make Sets for each Vertex
+Time:O(V)
+3.挑最小成本邊(u,v) => O(1)
+判斷(u,v)加入S是否會形成cycle => O(1)
+此動作做E回合
+所以time:E*O(1)=O(E)
+Total Time:O(ElogE)
+又已知E < V平方，因為E最多是V(V-1)/2
+所以logE < logV平方 = 2logV
+O(ElogE) => O(ElogV)
+--------------------------------------------------
+Prim's Algo:
+[DS版]
+令G=(V,E)是Connected無向圖，V={1,2,3...n}，U={1} // 視為Start Vertex，could be any Vertex
+Steps:
+1.挑出最小成本的邊(u,v)，且u ε U，v ε V-U
+2.加入(u,v)到S中，且將v點至V-U中移除，加入U中
+3.Repeat 1~2 Until U=V or E為空
+4.if S has < (n-1)條邊 then "No Spanning Tree"
+Time:O(n平方) or O(V平方)，因為Based on Adjacency Matrix
+[Algo版]
+MST-Prim(G,w,r)
+// w:各邊成本集合
+// r:Start Vertex
+{
+  for each u ε G.V do // 初值設定
+  {
+    u.key = ∞;
+    u.Ω = Null;
+  }
+  r.key = 0;
+  Q = G.V // 針對各頂點key值建立一個priority Queue => Fib.Heap or Min-Heap
+  while (Q != 0)
+  {
+    u = Extract-Min(Q); // 刪除最小key值之頂點
+    for each v ε G.Adj[u] do
+    {
+      if (v ε Q and W(u,v) < v.key)
+      {
+        v.Ω = u;
+        v.key = W(u,v); // 減少v的鍵值動作
+      }
+    }
+  }
+}
+Time分析:
+[法一]:priority Queue用Binary Heap製作(Min-Heap)
+Time = O(V)(初值) + O(V)(建Heap) + O(logV)*V次(Extract-Min(Q)) + O(logV)*2E(decrease key動作)
+一般而言，E會大於V (因為E>=(V-1))
+所以Prim's Time: O(ElogV) => 與Kruskal's algo相同
+[法二]:priority Queue用Fib. Heap製作，可加速decrease key之動作 => O(1)Time in amorized cost
+Time = O(V) + O(V) + O(logV)*V次 + O(1)*2E = O(V) + O(logV)*V次 + O(E)
+= O(VlogV + E)
+--------------------------------------------------
+Sollin's Algo
+[DS版本才有]
+Initially, 各頂點視為獨立Tree之Root
+Steps:
+1.每棵Tree各自挑出最小成本之樹邊
+2.刪除重複挑出的邊，只保留一份即可
+3.Repeat 1~2 Until 剩下一棵Tree or E為空
+4.if S has < (n-1)條邊 then "No Spanning Tree"
