@@ -1,0 +1,175 @@
+Shortest Path Length Problem之三種Algo
+---------------------------------------
+Dijkstra's Algo[DS版]
+令G=(V,E)為有向圖，|V|=n，邊上有成本(cost)值(距離值)
+Data Structure如下:
+1.Cost Matrix: n*n matrix 且 
+cost[i,j] = 
+{
+  成本值, if<i,j> ε E
+  0,      if i = j
+  ∞,      if <i,j> 不ε E
+}
+2.S:[1...n] of Boolean，初值皆為False
+S[i] =
+{
+  1, 表起點到i之最短路徑已確定
+  0, 尚未確定
+}
+3.Dist:[1...n] of int，Dist[i]表起點到i之Shortest path length
+觀念及Algo:
+Steps:
+1.自那些尚未確定最短路徑的點(即S[i]=0)中排出最小的Dist[i]值，令此點為u點
+2.S[u]=1，起點到u點之最短路徑確定
+3.for each w ε G.Adj[u]
+  {
+    if (S[w] == 0)
+    {
+      if (Dist[w] > (Dist[u] + cost[u,w]))
+      {
+        Dist[w] = Dist[u] + cost[u,w];
+      }
+    }
+  }
+上述1~3做(n-2)個回合(n點扣掉起點及剩下一個點時)
+Note:圖中不可以有負邊(Negative cost edge)，否則可能無法求出正確值
+---------------------------------------
+Dijkstra's Algo[Algo版]
+Dijkstra(G,W,Start)
+// G:有向圖, W:各邊成本集合, Start:起點
+{
+  Initialize(G,Start);
+  S = 0; // S代表已確定最短路徑之頂點集合
+  Q = G.V; // 依各點的d值建立priority queue using Heap or Fib. Heap => O(V)time
+  while(Q != 0)
+  {
+    u = Extract-min(Q); // 取出最小d值之頂點u
+    S = S ∪ {u}; // u之最短路徑已確定
+    for each vertex v ε G.Adj[u] // 共檢視E個Node
+    {
+      Relax(u,v,W);
+    }
+  }
+}
+Initialize(G,Start)
+{
+  for each vertex v ε G.V // O(V)time
+  {
+    v.d = ∞;
+    v.π = Null;
+  }
+  Start.d = 0; // 起點之d = 0
+}
+Relax(u,v,W)
+{
+  if (v.d > u.d + W(u,v))
+  {
+    v.d = u.d + W(u,v); // Decrease-key之運作
+    v.π = u;
+  }
+}
+Time分析:(同Prim's Algo相同，雖然是解不同問題)
+[法一]: Priority Queue用Heap作
+Time = O(V)(初值設定) + O(V)(建Heap) + O(logV) * V次(Extract-min(Q)) + O(logV) * E次(Decrease-key)
+=> O(VlogV) + O(ElogV) => O(ElogV)
+[法二]: Priority Queue用Fib. Heap作
+Time = O(V) + O(V) + O(logV) * V次 + O(1) * E次
+=> O(VlogV) + O(E) => O(VlogV + E)
+Note: Prim 及 Dijkstra 皆Based on BFS (因為都用到Queue)
+---------------------------------------
+Bellman-Ford Algo
+定義:
+Dist^k:是[1...n] of int，其中Dist^k[i]代表起點到i之最短路徑長，且最多經過k條邊(邊數<=k條邊)
+Dist^1 = 初值 = Cost Matrix
+Then 依序求出Dist^1, Dist^2, Dist^3, Dist^4,...,Dist^n-1陣列值 if |V|=n
+則Dist^n-1即為結果
+Dist^k[i] = min{Dist^k-1[i], min{Dist^k-1[u], cost[u,i]}} => u代表u1~um
+
+Algo:
+Bellman-Ford(Cost,Dist,n,S)
+// Cost:n*n成本矩陣
+// Dist:[1...n] of int
+// n = |V|
+// S:Start Vertex
+{
+  for i=1 to n // 初值設定
+  {
+    Dist[i] = Cost[S,i];
+  }
+  
+  for k=2 to (n-1) // 即Dist^1依序求Dist^n-1
+  {
+    for i=1 to n
+    {
+      for each vertex u that has edge 射入 i
+      {
+        if (Dist[i] > Dist[u] + Cost[u,i])
+        {
+          Dist[i] = Dist[u] + Cost[u,i];
+        }
+      }
+    }
+  }
+}
+時間分析:
+Time:O(n三次方), n=|V| => DS版本 for 矩陣
+Time:O(V*E) => Algo版本 for 串列
+Note:可有負邊存在，但不允許負長度Cycle(因為無法求出最短路徑長)
+---------------------------------------
+如何判斷圖中有負長度Cycle存在
+Algo:利用Bellman-Ford Algo
+觀念:|V|=n,Bellman-Ford求到Dist^n-1 Then 在多作一次求Dist^n，若Dist^n[i] < Dist^n-1[i]發生
+則表示有負長度cycle存在
+Algo:
+...
+Bellman-Ford Algo
+...
+for i=1 to n 
+{
+  for each vertex u that has edge 射入 i
+  {
+    if (Dist[i] > Dist[u] + Cost[u,i])
+    { 
+      return "有負長度Cycle"
+    }
+  }
+}
+return "No 負長度Cycle"
+---------------------------------------
+Floyd-warshall Algo
+G=(V,E)，|V|=n，V={1,2,3,...,n}
+定義:A^k是一個n*n矩陣，其中A^k[i,j]=i到j之最短路徑長，且途中經過的頂點編號必須<=k
+A^0=Cost Matrix=初值 Then 依序求出A^1,A^2,A^3,...,A^n
+則A^n矩陣即為結果
+
+A^k[i,j] = min{A^k-1[i,j], A^k-1[i,k] + A^(k-1)[k,j]}
+
+Algo:
+Floyd-warshall(Cost,A,n)
+// Cost:n*n成本矩陣
+// A:n*n matrix
+// n = |V|
+{
+  for i=1 to n // 初值設定，即A^0
+  {
+    for j=1 to n
+    {
+      A[i,j] = Cost[i,j];
+    }
+  }
+  
+  for k=1 to n // 依序求出A^1,A^2,A^3,...,A^n
+  {
+    for i=1 to n
+    {
+      for j=1 to n
+      {
+        if (A[i,j] > A[i,k] + A[k,j])
+        {
+          A[i,j] = A[i,k] + A[k,j];
+        }
+      }
+    }
+  }
+}
+Time: O(n三次方)
