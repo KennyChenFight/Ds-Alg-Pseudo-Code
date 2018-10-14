@@ -1,0 +1,36 @@
+A^+與A^*矩陣
+------------------------
+A^+: n*n matrix, n=|V|
+A^+[i,j] =
+{
+  1, if i到j有path且長度>0
+  0, otherwise
+}
+A^*: n*n matrix, n =|V|
+A^*[i,j] =
+{
+  1, if i到j有path且長度>=0
+  0, otherwise
+}
+-------------------------
+求A^+之Algo:
+{
+  for i=1 to n // 初值設定
+  {
+    for j=1 to n
+    {
+      A[i,j] = 相鄰矩陣[i,j];
+    }
+  }
+  
+  for k=1 to n
+  {
+    for i=1 to n
+    {
+      for j=1 to n
+      {
+        A[i,j] = A[i,j] or (A[i,k] and A[k,j])
+      }
+    }
+  }
+}
