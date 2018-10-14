@@ -1,0 +1,14 @@
+Topological Sort Alg
+-----------------------------
+[DS版]
+Steps:
+1.求出In-Degree=0之頂點i
+2.輸出i且刪除自i射出之邊
+3.Repeat 1~2 Until所有頂點皆輸出或沒有In-Degree=0之點
+4.若非所有頂點皆輸出，則無Topological Sort
+-----------------------------
+[Algo版]
+Steps:
+1.利用DFS => 矩陣:O(V平方), 串列:O(V+E)
+2.依Finished Time依序加入頂點到Link List之前端 => O(V)
+3.輸出Link List各頂點 => O(V)
