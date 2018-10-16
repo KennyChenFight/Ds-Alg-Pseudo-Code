@@ -1,0 +1,15 @@
+如何求出Articulation Point Alg
+--------------------------------
+1.先用DFS，求出各點的dfn值(DFS number/order)(從 1 or 0開始起算)
+2.畫出DFS Spanning Tree，且標出Back Edge
+3.求出各點low值
+low(x) = min 
+{
+  dfn(x),
+  dfn(y), y是x(含)及x的後代子孫最多經過一條Back Edge所到達之頂點
+}
+4.規則
+針對Root:若Root有>=2個子點，則root是Articulation Point
+針對非Root之頂點x，令y是x的任一個子點(存在即可)，若low(y)>=dfn(x)，
+則x是Articulation Point，否則不是
+=>沒有子點的一定不是Articulation Point
