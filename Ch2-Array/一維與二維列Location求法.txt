@@ -1,0 +1,17 @@
+一維陣列與二維陣列Location求法
+-------------------------------
+一維陣列[一般化方法]
+A:[l...u] of items
+lo:起始位址
+d:item大小佔d bytes
+=> u-l+1個Space
+A[i] = lo+(i-l)*d
+-------------------------------
+二維陣列[一般化方法]
+A:[l1...u1,l2...u2] of items
+lo:起始位址
+d:item大小佔d bytes
+1.Row-major
+A[i,j] = lo+[(i-l1)*(u2-l2+1)+(j-l2)]*d
+2.Column-major
+A[i,j] = lo+[(j-l2)*(u1-l1+1)+(i-l1)]*d
