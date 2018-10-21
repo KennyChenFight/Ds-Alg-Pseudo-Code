@@ -1,0 +1,55 @@
+Circular Link List之基本操作
+-----------------------------
+回收一條Circular Link List
+Release(C:Circular link list)
+{
+  if (C != Null)
+  {
+    P = C->Next;
+    C->Next = AV;
+    AV = P;
+  }
+}
+Time: O(1)
+-----------------------------
+連接A、B兩個Circular Link List成一個Circular Link List
+Concatenate(A,B,C:Circular Link List)
+{
+  C = Null;
+  if (A != Null and B == Null)
+  {
+    C = A;
+  }
+  else if (A == Null and B != Null)
+  {
+    C = A;
+  }
+  else if (A != Null and B != Null)
+  {
+    P = A->Next;
+    A->Next = B->Next;
+    B->Next = P;
+    C = P;
+  }
+  return C;
+}
+Time:O(1)
+-----------------------------
+計算長度
+Len(C:Circular Link List)
+{
+  if (C == Null)
+  {
+    return 0;
+  }
+  else
+  {
+    P = C;
+    s = 0;
+    Repeat
+      s = s + 1;
+      P = P->Next;
+    Until(P != C)
+    return s;
+  }
+}
