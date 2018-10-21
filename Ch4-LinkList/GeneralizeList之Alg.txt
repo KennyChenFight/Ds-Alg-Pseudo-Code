@@ -1,0 +1,95 @@
+Generalize List(一般化串列)之操作
+----------------------------------
+Node Stucture: Tag, 變動欄位, Next
+Tag =>
+{
+  False => Data欄: 存atomic data值
+  True  => dLink欄: pointer to sublist
+}
+----------------------------------
+Copy a Generalize List
+Copy(orig:Generalize List)
+{
+  if (orig == Null)
+  {
+    t = Null;
+  }
+  else
+  {
+    new(t);
+    t->Tag = orig->Tag;
+    if (t->Tag == False)
+    {
+      t->Data = orig->Data;
+    }
+    else
+    {
+      t->dLink = Copy(orig->dLink);
+    }
+    t->Next = Copy(orig->Next);
+  }
+}
+----------------------------------
+Equal(s,t:G.List)
+{
+  res = False;
+  if (s == Null and t == Null)
+  {
+    res = True;
+  }
+  else if (s != Null and t != Null)
+  {
+    if (s->Tag == T->Tag)
+    {
+      if (s->Tag == False)
+      {
+        if (s->Data == T->Data)
+        {
+          x = True;
+        }
+      }
+      else
+      {
+        x = Equal(s->dLink, t->dLink);
+      }
+      if (x == True)
+      {
+        res = Equal(s->Next, t->Next);
+      }
+    }
+  }
+  return res;
+}
+----------------------------------
+Depth(S):求S串列之深度
+=>
+Depth(S) = 
+{
+  0, if S == Null
+  1 + MAX{depth(ai)|ai ε S中之子串列Nodes}, otherwise
+}
+Depth(S:G.List)
+{
+  if (S == Null)
+  {
+    return 0;
+  }
+  else 
+  {
+    MAX = 0;
+    P = S;
+    while(P != Null)
+    {
+      if (P->Tag == True)
+      {
+        n = Depth(P->dLink);
+        if (n > MAX)
+        {
+          MAX = n;
+        }
+      }
+      P = P->Next;
+    }
+    return (MAX + 1);
+  }
+}
