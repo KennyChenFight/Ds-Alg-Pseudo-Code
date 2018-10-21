@@ -1,0 +1,25 @@
+Double Link List之基本操作
+---------------------------
+Node Structure: LLink, Data, RLink
+---------------------------
+插入t Node after x Node
+=>
+t->RLink = x->RLink;
+t->LLink = x;
+(x->RLink)->LLink = t;
+x->RLink = t;
+須改變4個Pointers
+Note: Single Link List
+=>
+t->Next = x->Next;
+x->Next = t;
+只須改變2個Pointers
+--------------------------- 
+刪除 x Node
+=>
+(x->LLink)->RLink = x-RLink;
+(x->RLink)->LLink = x-LLink;
+須改變2個Pointers
+Note: Single Link List
+=>須改變1個Pointer
+
