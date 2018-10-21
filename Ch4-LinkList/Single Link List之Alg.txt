@@ -1,0 +1,45 @@
+Single Link List之基本操作
+---------------------------
+求長度(即Node數)
+Len(S:Single link list)
+{
+  P = S;
+  c = 0;
+  while (p != Null)
+  {
+    c = c + 1;
+    P = P->Next;
+  }
+  return c;
+}
+Time: O(n)，n = Node數
+---------------------------
+回收一條Single link list
+Release(S:Single link list)
+{
+  if (S != Null)
+  {
+    P = S;
+    while (P->Next != Null)
+    {
+      P = P->Next;
+    }
+    P->Next = AV; // AV List為可用空間串列
+    AV = S;
+  }
+}
+Time: O(n)，n = Node數
+---------------------------
+Invert(反轉) a Single Link List
+Invert(S:Single link list)
+{
+  q = Null; P = S;
+  while(P != Null)
+  {
+    r = q;
+    q = p;
+    p = p->Next;
+    q->Next = r;
+  }
+  S = q;
+}
