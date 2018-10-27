@@ -1,0 +1,59 @@
+其他類遞迴之Alg
+----------------------------------
+Tower of Hanoi(河內塔問題)
+搬n個Disks from A to C且遵守下列rules:
+1.一次只能一個Disk
+2.小盤不可在大盤之下
+觀念:
+Hanoi(n(搬盤數), A(來源), B(暫存地), C(目的地))
+=>
+1.Hanoi(n-1, A, C, B)
+2.Hanoi(1, A, B, C)
+3.Hanoi(n-1,B, A, C)
+Alg
+=>
+Procedure Hanoi(n:盤數, A, B, C:tower)
+{
+  if (n == 1)
+  {
+    print("move disk", n, "from", A, "to", C);
+  }
+  else
+  {
+    Hanoi(n-1, A, C, B);
+    // Hanoi(1, A, B, C);
+    Hanoi(n-1, B, A, C);
+  }
+}
+--------------------------------
+Permutation(排列組合)
+觀念:
+Perm(a,b,c)
+{
+  'a' + Perm(b,c)
+  'b' + Perm(a,c)
+  'c' + Perm(a,b)
+}
+=>每個data輪流做Head，剩下的data Permutation
+Alg:
+Void Perm(char list[], int i, int n)
+// 產生list[i]~list[n]之排列組合
+{
+  if (i == n) // 印list內容
+  {
+    for (j = 1; j <= n; j++)
+    {
+      print(list[j]);
+    }
+  }
+  else
+  {
+    for (j = i; j <= n; j++)
+    {
+      Swap(list[i], list[j]); // list[j]作頭
+      Perm(list, i+1, n);
+      Swap(list[i], list[j]); // 還原
+    }
+  }
+}
+Time:O(n!*n)
