@@ -1,0 +1,148 @@
+數學類遞迴與非遞迴之Alg
+--------------------------------
+Recursive階乘:
+int FAC(int n)
+{
+  if (n == 0)
+  {
+    return 1;
+  }
+  else
+  {
+    return FAC(n-1) * n;
+  }
+}
+Non-Recursive階乘
+int FAC(int n)
+{
+  if (n == 0)
+  {
+    return 1;
+  }
+  else
+  {
+    for (i = 1; i <=n ; i++)
+    {
+      s = s * i;
+    }
+    return s;
+  }
+}
+--------------------------------
+加總:
+int Sum(int n)
+{
+  if (n == 0)
+  {
+    return 0;
+  }
+  else
+  {
+    return Sum(n-1) + n;
+  }
+}
+--------------------------------
+Recursive費式數列
+int Fib(int n)
+{
+  if (n == 0)
+  {
+    return 0;
+  }
+  else if (n == 1)
+  {
+    return 1;
+  }
+  else
+  {
+    return Fib(n-1) + Fib(n-2);
+  }
+}
+Non-Recursive費式數列
+int Fib(int n)
+{
+  if (n == 0)
+  {
+    return 0;
+  }
+  else if (n == 1)
+  {
+    return 1;
+  }
+  else
+  {
+    int a = 0, b = 1, c, i;
+    for (i = 2; i <= n; i++)
+    {
+      c = a + b;
+      a = b;
+      b = c;
+    }
+    return c;
+  }
+}
+--------------------------------
+Recursive Binomial Coefficient(二項式係數)
+int Bin(int n, int m)
+{
+  if (m == 0 || m == n)
+  {
+    return 1;
+  }
+  else
+  {
+    return Bin(n, m-1) + Bin(n-1, m-1);
+  }
+}
+--------------------------------
+Recursive最大公因數
+int GCD(int A, int B)
+{
+  if (A % B == 0)
+  {
+    return B;
+  }
+  else
+  {
+    return GCD(B, A % B);
+  }
+}
+--------------------------------
+Recursive x的y次方
+int Exp(int x, int y)
+{
+  if (y == 0)
+  {
+    return 1;
+  }
+  else
+  {
+    return Exp(x, y-1) * x;
+  }
+}
+--------------------------------
+Recursive 2的n次方
+int Exp(int n)
+{
+  if (n == 0)
+  {
+    return 1;
+  }
+  else
+  {
+    return Exp(n-1) * 2;
+  }
+}
+--------------------------------
+Recursive Ackerman's Function
+A(m,n) = 
+{
+  n+1, if m == 0
+  A(m-1, 1), if n == 0
+  A(m-1, A(m, n-1)), otherwise
+}
+常考排行榜:
+1.A(2,2)=7
+2.A(2,1)=5
+3.A(1,2)=4
+4.A(2,3)=9
